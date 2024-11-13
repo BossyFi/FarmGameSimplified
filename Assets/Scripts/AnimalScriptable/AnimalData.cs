@@ -16,5 +16,7 @@ namespace AnimalScriptable
         public AnimationCurve hungerCurve;
         public AnimationCurve entertainmentCurve;
         public AnimationCurve healthCurve;
+
+        public Item.ItemType favFood;
     }
 }
