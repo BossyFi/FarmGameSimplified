@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
   m_Name: AnimalBehaviour Blackboard Editor
   m_EditorClassIdentifier: 
-  VersionTimestamp: 638671157447083070
+  VersionTimestamp: 638671766472259350
   AssetID:
-    m_Value0: 0
-    m_Value1: 0
+    m_Value0: 6450518231103166003
+    m_Value1: 12446567774996074841
   m_Blackboard:
     m_Variables:
-    - rid: 5829524099014852622
+    - rid: 5829524114786484563
   m_SharedBlackboardVariableGuids: []
   references:
     version: 2
     RefIds:
-    - rid: 5829524099014852622
+    - rid: 5829524114786484563
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Name: AnimalBehaviour Blackboard Editor
   m_EditorClassIdentifier: 
   AssetID:
-    m_Value0: 0
-    m_Value1: 0
+    m_Value0: 6450518231103166003
+    m_Value1: 12446567774996074841
   m_Variables:
   - rid: 5829524099014852608
-  m_VersionTimestamp: 638671157447083070
+  m_VersionTimestamp: 638671766472259350
   m_CommandBuffer:
     m_Commands: []
   m_RuntimeBlackboardAsset: {fileID: -2464214008992734636}
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Description: 
   m_Nodes:
   - rid: 5829524099014852609
-  m_VersionTimestamp: 638671157447083060
+  m_VersionTimestamp: 638671766472259340
   m_DebugInfo: {fileID: 6425505475123878104}
   AssetID:
     m_Value0: 6450518231103166003
@@ -107,7 +107,7 @@ MonoBehaviour:
     - rid: 5829524099014852609
       type: {class: StartNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
-        Position: {x: -12.805681, y: -27.318789}
+        Position: {x: -24.499699, y: -183.52896}
         ID:
           m_Value0: 216432461846061927
           m_Value1: 5479628243717269594
@@ -144,53 +144,53 @@ MonoBehaviour:
   m_Name: AnimalBehaviour
   m_EditorClassIdentifier: 
   Graphs:
-  - rid: 5829524099014853063
+  - rid: 5829524114786484569
   RootGraph:
-    rid: 5829524099014853063
+    rid: 5829524114786484569
   m_DebugInfo: {fileID: 6425505475123878104}
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 5829524099014853063
+    - rid: 5829524114786484569
       type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         AuthoringAssetID:
           m_Value0: 6450518231103166003
           m_Value1: 12446567774996074841
-        m_DebugInfo: {fileID: 6425505475123878104}
+        m_DebugInfo: {fileID: 0}
         Root:
-          rid: 5829524099014853064
+          rid: 5829524114786484570
         BlackboardReference:
-          rid: 5829524099014853065
+          rid: 5829524114786484571
         BlackboardGroupReferences: []
-        m_VersionTimestamp: 638671157447083060
-    - rid: 5829524099014853064
+        m_VersionTimestamp: 638671766472259340
+    - rid: 5829524114786484570
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
           m_Value0: 216432461846061927
           m_Value1: 5479628243717269594
         Graph:
-          rid: 5829524099014853063
+          rid: 5829524114786484569
         m_Parent:
           rid: -2
         m_Child:
           rid: -2
         Repeat: 1
-    - rid: 5829524099014853065
+    - rid: 5829524114786484571
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Blackboard:
-          rid: 5829524099014853066
+          rid: 5829524114786484572
         m_Source: {fileID: -2464214008992734636}
-    - rid: 5829524099014853066
+    - rid: 5829524114786484572
       type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Variables:
-        - rid: 5829524099014853067
-    - rid: 5829524099014853067
+        - rid: 5829524114786484573
+    - rid: 5829524114786484573
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
