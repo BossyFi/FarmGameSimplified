@@ -1,13 +1,14 @@
 using System;
+using UI.Shop;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public int money = 100;
 
-    public void BuyItem(Item.ItemType item)
+    public void BuyItem(ShopItem.ItemType item)
     {
-        int cost = Item.GetCost(item);
+        int cost = ShopItem.GetCost(item);
         if (cost > money)
         {
             Debug.Log("Unable to buy Item");

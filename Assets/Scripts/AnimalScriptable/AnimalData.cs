@@ -1,3 +1,4 @@
+using UI.Shop;
 using UnityEngine;
 
 namespace AnimalScriptable
@@ -17,6 +18,6 @@ namespace AnimalScriptable
         public AnimationCurve entertainmentCurve;
         public AnimationCurve healthCurve;
 
-        public Item.ItemType favFood;
+        public ShopItem.ItemType favFood;
     }
 }
