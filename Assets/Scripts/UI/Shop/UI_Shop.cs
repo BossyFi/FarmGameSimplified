@@ -2,7 +2,6 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.Shop
@@ -38,6 +37,8 @@ namespace UI.Shop
             //Configure the element according to the item
             newShopItem.Find("ItemName").GetComponent<TextMeshProUGUI>().SetText(type.ToString());
             newShopItem.Find("ItemPrize").GetComponent<TextMeshProUGUI>().SetText(ShopItem.GetCost(type).ToString());
+            newShopItem.Find("ItemSprite").GetComponent<Image>().sprite =
+                ShopItem.GetSprite(type);
         
             newShopItem.gameObject.SetActive(true);
 
@@ -62,13 +63,13 @@ namespace UI.Shop
         //Testing
     
         [ContextMenu("Create ItemGUI 1")]
-        public void CreateItem1(){ CreateShopItem(ShopItem.ItemType.Item_1);}
+        public void CreateItem1(){ CreateShopItem(ShopItem.ItemType.Item1);}
     
         [ContextMenu("Create ItemGUI 2")]
-        public void CreateItem2(){ CreateShopItem(ShopItem.ItemType.Item_2);}
+        public void CreateItem2(){ CreateShopItem(ShopItem.ItemType.Item2);}
     
         [ContextMenu("Create ItemGUI 3")]
-        public void CreateItem3(){ CreateShopItem(ShopItem.ItemType.Item_3);}
+        public void CreateItem3(){ CreateShopItem(ShopItem.ItemType.Item3);}
 
         public void Configure(UIMediator mediator)
         {
