@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ArticFox
+  m_Name: Artic Fox
   m_Controller: {fileID: 9100000, guid: 2b25437869ac80d4c98e82561fbc32a9, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 6246ef5693d81214a963632316119416, type: 3}
