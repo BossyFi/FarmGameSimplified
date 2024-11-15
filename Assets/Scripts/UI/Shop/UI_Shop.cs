@@ -10,7 +10,7 @@ namespace UI.Shop
     public class UIShop : MonoBehaviour
     {
         [SerializeField] private Transform container;
-        [SerializeField] private Transform shopItemTemplate;
+        [SerializeField] private GameObject shopItemTemplate;
         [SerializeField] private Button closeBtn;
         
         private CanvasGroup _canvasGroup;
@@ -23,11 +23,8 @@ namespace UI.Shop
         private void Awake()
         {
             buyEvent.AddListener(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().BuyItem);
-            _canvasGroup = transform.Find("Canvas").GetComponent<CanvasGroup>();
+            _canvasGroup = gameObject.GetComponent<CanvasGroup>();
             container = _canvasGroup.gameObject.transform.Find("Container");
-            shopItemTemplate = container.Find("ShopItemTemplate");
-            shopItemTemplate.gameObject.SetActive(false);
-            closeBtn = _canvasGroup.gameObject.transform.Find("CloseBtn").GetComponent<Button>();
             closeBtn.onClick.AddListener(Hide);
             Hide();
         }
@@ -35,7 +32,7 @@ namespace UI.Shop
         private void CreateShopItem(ShopItem.ItemType type)
         {
             //Instantiate the new UI element
-            Transform newShopItem = Instantiate(shopItemTemplate, container);
+            Transform newShopItem = Instantiate(shopItemTemplate.transform, container);
             // RectTransform shopItemRT = newShopItem.GetComponent<RectTransform>();
         
             //Configure the element according to the item
