@@ -160,6 +160,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 40380551}
     m_Modifications:
+    - target: {fileID: 3567900529196109584, guid: 8640f86cc1cb10448814047cfd71eec9, type: 3}
+      propertyPath: 'managedReferences[5829524136005731266]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.Animator,
+        UnityEngine.AnimationModule]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567900529196109584, guid: 8640f86cc1cb10448814047cfd71eec9, type: 3}
+      propertyPath: managedReferences[5829524136005731266].Name
+      value: Animator
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567900529196109584, guid: 8640f86cc1cb10448814047cfd71eec9, type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567900529196109584, guid: 8640f86cc1cb10448814047cfd71eec9, type: 3}
+      propertyPath: managedReferences[5829524136005731266].m_Value
+      value: 
+      objectReference: {fileID: 1860306817}
+    - target: {fileID: 3567900529196109584, guid: 8640f86cc1cb10448814047cfd71eec9, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[1]'
+      value: 5829524136005731266
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567900529196109584, guid: 8640f86cc1cb10448814047cfd71eec9, type: 3}
+      propertyPath: managedReferences[5829524136005731266].GUID.m_Value0
+      value: 16310422311525438659
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567900529196109584, guid: 8640f86cc1cb10448814047cfd71eec9, type: 3}
+      propertyPath: managedReferences[5829524136005731266].GUID.m_Value1
+      value: 1805199896939317687
+      objectReference: {fileID: 0}
     - target: {fileID: 5528603755101481345, guid: 8640f86cc1cb10448814047cfd71eec9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -1009,6 +1038,11 @@ MonoBehaviour:
   buyEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &1860306817 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5528603755101481347, guid: 8640f86cc1cb10448814047cfd71eec9, type: 3}
+  m_PrefabInstance: {fileID: 211417779}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1860306819 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5528603755101481345, guid: 8640f86cc1cb10448814047cfd71eec9, type: 3}
