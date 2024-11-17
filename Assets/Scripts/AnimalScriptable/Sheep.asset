@@ -1386,3 +1386,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  favFood: 0
+  startCryingHunger: 0.7
+  startCryingEntertainment: 0.5
+  startCryingHealth: 0.3

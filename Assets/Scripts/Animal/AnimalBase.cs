@@ -27,9 +27,9 @@ namespace Animal
         private float _entertainmentTime;
         private float _healthTime;
 
-        private bool IsHungry => hunger <= 0;
-        private bool IsBored => entertainment <= 0;
-        private bool IsSick => health <= 0;
+        private bool IsHungry => hunger <= animalData.startCryingHunger * animalData.baseHunger;
+        private bool IsBored => entertainment <= animalData.startCryingEntertainment * animalData.baseEntertainment;
+        private bool IsSick => health <= animalData.startCryingHealth * animalData.baseHealth;
 
         private bool _wasHungry;
         private bool _wasBored;
@@ -63,7 +63,7 @@ namespace Animal
 
         private void UpdateAnimalStats()
         {
-            if (canGetHungry && !IsHungry)
+            if (canGetHungry && hunger > 0)
             {
                 if (!Mathf.Approximately(_prevHunger, hunger))
                 {
@@ -78,7 +78,7 @@ namespace Animal
                 _prevHunger = hunger;
             }
 
-            if (canGetBored && !IsBored)
+            if (canGetBored && entertainment > 0)
             {
                 if (!Mathf.Approximately(_prevEntertainment, entertainment))
                 {
@@ -94,7 +94,7 @@ namespace Animal
                 _prevEntertainment = entertainment;
             }
 
-            if (canGetSick && !IsSick)
+            if (canGetSick && health > 0)
             {
                 if (!Mathf.Approximately(_prevHealth, health))
                 {
