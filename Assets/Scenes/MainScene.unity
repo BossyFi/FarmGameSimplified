@@ -415,6 +415,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3326781497290907523, guid: ac16983f506041947b81a28e5cca8743, type: 3}
   m_PrefabInstance: {fileID: 3361119530213106158}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &638954177 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3156981941755440154, guid: ac16983f506041947b81a28e5cca8743, type: 3}
+  m_PrefabInstance: {fileID: 3361119530213106158}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8083e53bc89a0412b8bed574fb719c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &718054418
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +595,7 @@ GameObject:
   - component: {fileID: 885360924}
   - component: {fileID: 885360923}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Ecosphere
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -603,6 +614,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 100
+  moneyEarnedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  collectionT: 3
+  animals:
+  - {fileID: 638954177}
 --- !u!4 &885360924
 Transform:
   m_ObjectHideFlags: 0
@@ -697,7 +714,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1450828242568822411
+--- !u!1001 &1883160704
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -748,6 +765,10 @@ PrefabInstance:
     - target: {fileID: 7837844091351793937, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
       propertyPath: m_Name
       value: UI_Mediator
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062678695987804812, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
+      propertyPath: m_Alpha
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -821,4 +842,4 @@ SceneRoots:
   - {fileID: 40380551}
   - {fileID: 885360924}
   - {fileID: 1528430728}
-  - {fileID: 1450828242568822411}
+  - {fileID: 1883160704}

@@ -21,7 +21,6 @@ namespace UI.Shop
 
         private void Awake()
         {
-            buyEvent.AddListener(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().BuyItem);
             _canvasGroup = gameObject.GetComponent<CanvasGroup>();
             container = _canvasGroup.gameObject.transform.Find("Container");
             closeBtn.onClick.AddListener(Hide);
@@ -60,17 +59,6 @@ namespace UI.Shop
             buyEvent.Invoke(item);
         }
 
-        //Testing
-    
-        [ContextMenu("Create ItemGUI 1")]
-        public void CreateItem1(){ CreateShopItem(ShopItem.ItemType.Item1);}
-    
-        [ContextMenu("Create ItemGUI 2")]
-        public void CreateItem2(){ CreateShopItem(ShopItem.ItemType.Item2);}
-    
-        [ContextMenu("Create ItemGUI 3")]
-        public void CreateItem3(){ CreateShopItem(ShopItem.ItemType.Item3);}
-
         public void Configure(UIMediator mediator)
         {
             _mediator = mediator;
@@ -88,6 +76,16 @@ namespace UI.Shop
             _canvasGroup.alpha = 0;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
+        }
+        
+        //Testing
+
+        [ContextMenu("Create items")]
+        public void CreateItem1()
+        {
+            CreateShopItem(ShopItem.ItemType.Item1);
+            CreateShopItem(ShopItem.ItemType.Item2);
+            CreateShopItem(ShopItem.ItemType.Item3);
         }
     }
 }
