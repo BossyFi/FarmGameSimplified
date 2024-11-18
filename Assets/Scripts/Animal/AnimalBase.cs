@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using AnimalScriptable;
 using MoreMountains.Feedbacks;
 using UnityEngine;
@@ -8,16 +9,17 @@ namespace Animal
 {
     public class AnimalBase : MonoBehaviour
     {
-        public AnimalData animalData;
-        public float hunger;
+        [Header("SCRIPTABLE OBJECT")] public AnimalData animalData;
+        [Space(1)] [Header("STATS")] public float hunger;
         public float entertainment;
         public float health;
+        public float happiness;
 
-        public bool canGetHungry;
+        [Space(1)] [Header("FLAGS")] public bool canGetHungry;
         public bool canGetBored;
         public bool canGetSick;
 
-        public MMF_Player hungerFeedback;
+        [Space(1)] [Header("FEEDBACKS")] public MMF_Player hungerFeedback;
         public MMF_Player boredFeedback;
         public MMF_Player sickFeedback;
 
@@ -46,6 +48,29 @@ namespace Animal
         private float _maxHungerTime;
         private float _maxEntertainmentTime;
         private float _maxHealthTime;
+
+        private WaitForSeconds _waitTime;
+        private bool _canCheckHappiness;
+
+        public bool CanCheckHappiness
+        {
+            get => _canCheckHappiness;
+            set
+            {
+                if (_canCheckHappiness != value)
+                {
+                    _canCheckHappiness = value;
+                    if (_canCheckHappiness)
+                    {
+                        StartCoroutine(nameof(CheckHappiness));
+                    }
+                    else
+                    {
+                        StopCoroutine(nameof(CheckHappiness));
+                    }
+                }
+            }
+        }
 
         #endregion
 
@@ -151,6 +176,7 @@ namespace Animal
             hunger = animalData.baseHunger;
             entertainment = animalData.baseEntertainment;
             health = animalData.baseHealth;
+            happiness = 0;
             _maxHunger = hunger;
             _maxEntertainment = entertainment;
             _maxHealth = health;
@@ -160,6 +186,30 @@ namespace Animal
             _prevHunger = hunger;
             _prevEntertainment = entertainment;
             _prevHealth = health;
+            _waitTime = new WaitForSeconds(animalData.timeToCheckHappiness);
+        }
+
+        private IEnumerator CheckHappiness()
+        {
+            while (CanCheckHappiness)
+            {
+                if (!IsHungry && !IsBored && !IsSick)
+                {
+                    happiness = Mathf.Clamp(happiness + 1, 0, 100);
+                }
+                else
+                {
+                    happiness = Mathf.Clamp(happiness - 1, 0, 100);
+                }
+
+                yield return _waitTime;
+            }
+        }
+
+        [ContextMenu("Switch Happiness Flag")]
+        public void SwitchHappinessFlag()
+        {
+            CanCheckHappiness = !CanCheckHappiness;
         }
     }
 }

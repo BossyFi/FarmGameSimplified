@@ -14,7 +14,7 @@ namespace AnimalScriptable
         public int timeToDepleteHunger = 100;
         public int timeToDepleteEntertainment = 100;
         public int timeToDepleteHealth = 100;
-
+        public int timeToCheckHappiness = 20;
         public AnimationCurve hungerCurve = AnimationCurve.Linear(0, 1, 1, 0);
         public AnimationCurve entertainmentCurve = AnimationCurve.EaseInOut(0, 1, 1, 0);
         public AnimationCurve healthCurve = AnimationCurve.EaseInOut(0, 1, 1, 0);
