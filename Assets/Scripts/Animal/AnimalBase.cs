@@ -191,16 +191,15 @@ namespace Animal
 
         private IEnumerator CheckHappiness()
         {
+            int hungerValue = 0;
+            int entertainmentValue = 0;
+            int healthValue = 0;
             while (CanCheckHappiness)
             {
-                if (!IsHungry && !IsBored && !IsSick)
-                {
-                    happiness = Mathf.Clamp(happiness + 1, 0, 100);
-                }
-                else
-                {
-                    happiness = Mathf.Clamp(happiness - 1, 0, 100);
-                }
+                hungerValue = IsHungry ? -2 : 1;
+                entertainmentValue = IsBored ? -1 : 1;
+                healthValue = IsSick ? -3 : 0;
+                happiness = Mathf.Clamp(happiness + hungerValue + entertainmentValue + healthValue, 0, 100);
 
                 yield return _waitTime;
             }
