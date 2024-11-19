@@ -176,7 +176,7 @@ namespace Animal
             hunger = animalData.baseHunger;
             entertainment = animalData.baseEntertainment;
             health = animalData.baseHealth;
-            happiness = 0;
+            happiness = animalData.baseHappiness;
             _maxHunger = hunger;
             _maxEntertainment = entertainment;
             _maxHealth = health;

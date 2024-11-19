@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 100
-  moneyEarnedEvent:
+  moneyUpdatedEvent:
     m_PersistentCalls:
       m_Calls: []
   collectionT: 3
@@ -722,6 +722,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 928309474507587853, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 928309474507587853, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 928309474507587853, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 928309474507587853, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2506987243202180649, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -761,6 +777,10 @@ PrefabInstance:
     - target: {fileID: 2506987243202180649, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208272950552268965, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 193.627
       objectReference: {fileID: 0}
     - target: {fileID: 7837844091351793937, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
       propertyPath: m_Name

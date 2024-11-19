@@ -10,6 +10,7 @@ namespace AnimalScriptable
         public float baseHunger = 100;
         public float baseEntertainment = 100;
         public float baseHealth = 100;
+        public float baseHappiness = 50;
 
         public int timeToDepleteHunger = 100;
         public int timeToDepleteEntertainment = 100;
