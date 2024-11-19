@@ -137,37 +137,25 @@ namespace Animal
 
         private void InvokeFeedbacks()
         {
-            // Verifica si el estado de hambre ha cambiado a true
-            if (IsHungry && !_wasHungry)
+            // Verifica si el estado de hambre ha cambiado
+            if (IsHungry != _wasHungry)
             {
-                hungerFeedback?.PlayFeedbacks(); // Dispara el evento de hambre
-                _wasHungry = true; // Actualiza el estado previo
-            }
-            else if (!IsHungry)
-            {
-                _wasHungry = false;
+                hungerFeedback?.PlayFeedbacks(); // Dispara el evento
+                _wasHungry = IsHungry; // Actualiza el estado previo
             }
 
-            // Verifica si el estado de aburrimiento ha cambiado a true
-            if (IsBored && !_wasBored)
+            // Verifica si el estado de aburrimiento ha cambiado
+            if (IsBored != _wasBored)
             {
-                boredFeedback?.PlayFeedbacks(); // Dispara el evento de aburrimiento
-                _wasBored = true; // Actualiza el estado previo
-            }
-            else if (!IsBored)
-            {
-                _wasBored = false;
+                boredFeedback?.PlayFeedbacks(); // Dispara el evento
+                _wasBored = IsBored; // Actualiza el estado previo
             }
 
-            // Verifica si el estado de enfermedad ha cambiado a true
-            if (IsSick && !_wasSick)
+            // Verifica si el estado de enfermedad ha cambiado
+            if (IsSick != _wasSick)
             {
-                sickFeedback?.PlayFeedbacks(); // Dispara el evento de enfermedad
-                _wasSick = true; // Actualiza el estado previo
-            }
-            else if (!IsSick)
-            {
-                _wasSick = false;
+                sickFeedback?.PlayFeedbacks(); // Dispara el evento
+                _wasSick = IsSick; // Actualiza el estado previo
             }
         }
 
@@ -209,6 +197,11 @@ namespace Animal
         public void SwitchHappinessFlag()
         {
             CanCheckHappiness = !CanCheckHappiness;
+        }
+
+        public bool GetBoolStats()
+        {
+            return !(IsHungry || IsBored || IsSick);
         }
     }
 }
