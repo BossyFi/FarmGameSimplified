@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Animal;
-using MoreMountains.Tools;
 using UI;
 using UI.Shop;
 using UnityEngine;
