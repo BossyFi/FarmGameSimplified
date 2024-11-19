@@ -10,6 +10,7 @@ public class EcoSphere : MonoBehaviour
     public int money = 100;
 
     private bool _isOpen = true;
+
     public bool IsOpen
     {
         get => _isOpen;
@@ -23,7 +24,7 @@ public class EcoSphere : MonoBehaviour
             else _isOpen = value;
         }
     }
-    
+
     public float collectionT; //Seconds between each call collection 
 
     public List<AnimalBase> animals;
@@ -50,7 +51,6 @@ public class EcoSphere : MonoBehaviour
             // moneyUpdatedEvent.Invoke(money);
             MoneyUpdateEvent.Trigger(money, -cost);
         }
-        
     }
 
     private async void CollectionLoop()
@@ -72,7 +72,6 @@ public class EcoSphere : MonoBehaviour
         {
             totalHappiness += animal.happiness;
         }
-        Debug.Log("Collected " + totalHappiness + "$ !");
 
         return (int)Math.Truncate(totalHappiness);
     }

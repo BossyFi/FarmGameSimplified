@@ -193,12 +193,6 @@ namespace Animal
             }
         }
 
-        [ContextMenu("Switch Happiness Flag")]
-        public void SwitchHappinessFlag()
-        {
-            CanCheckHappiness = !CanCheckHappiness;
-        }
-
         public bool GetBoolStats()
         {
             return !(IsHungry || IsBored || IsSick);
