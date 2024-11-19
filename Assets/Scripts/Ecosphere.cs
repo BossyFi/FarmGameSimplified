@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Animal;
+using MoreMountains.Tools;
 using UI;
 using UI.Shop;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class EcoSphere : MonoBehaviour
 {
     public int money = 100;
-    [FormerlySerializedAs("moneyEarnedEvent")] public UnityEvent<int> moneyUpdatedEvent;
 
     private bool _isOpen = true;
     public bool IsOpen
@@ -33,9 +31,10 @@ public class EcoSphere : MonoBehaviour
 
     private UIMediator _uiMediator;
 
-    private void Awake()
+    private void Start()
     {
-        moneyUpdatedEvent.Invoke(money);
+        // moneyUpdatedEvent.Invoke(money);
+        MoneyUpdateEvent.Trigger(money, 0);
         CollectionLoop();
     }
 
@@ -49,7 +48,8 @@ public class EcoSphere : MonoBehaviour
         else
         {
             money -= cost;
-            moneyUpdatedEvent.Invoke(money);
+            // moneyUpdatedEvent.Invoke(money);
+            MoneyUpdateEvent.Trigger(money, -cost);
         }
         
     }
@@ -59,8 +59,10 @@ public class EcoSphere : MonoBehaviour
         while (_isOpen)
         {
             await Awaitable.WaitForSecondsAsync(collectionT);
-            money += CollectMoney();
-            moneyUpdatedEvent.Invoke(money);
+            int profit = CollectMoney();
+            money += profit;
+            // moneyUpdatedEvent.Invoke(money);
+            MoneyUpdateEvent.Trigger(money, profit);
         }
     }
 

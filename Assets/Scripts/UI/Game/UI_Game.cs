@@ -21,7 +21,7 @@ namespace UI.Game
             _mediator = uiMediator;
         }
 
-        public void UpdateMoney(int moneyCount)
+        public void UpdateMoney(int moneyCount, int profit)
         {
             moneyText.SetText(moneyCount.ToString());
         }
