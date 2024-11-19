@@ -593,7 +593,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 885360924}
-  - component: {fileID: 885360923}
+  - component: {fileID: 885360925}
   m_Layer: 0
   m_Name: Ecosphere
   m_TagString: Player
@@ -601,25 +601,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &885360923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885360922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4291ebacd7d44f918ec8f8aa8b76c3a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  money: 100
-  moneyUpdatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  collectionT: 3
-  animals:
-  - {fileID: 638954177}
 --- !u!4 &885360924
 Transform:
   m_ObjectHideFlags: 0
@@ -635,6 +616,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &885360925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885360922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4291ebacd7d44f918ec8f8aa8b76c3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 100
+  collectionT: 3
+  animals:
+  - {fileID: 638954177}
 --- !u!1 &1528430725
 GameObject:
   m_ObjectHideFlags: 0
