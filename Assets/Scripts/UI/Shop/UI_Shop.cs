@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -11,9 +12,10 @@ namespace UI.Shop
         [SerializeField] private Transform container;
         [SerializeField] private GameObject shopItemTemplate;
         [SerializeField] private Button closeBtn;
+        [SerializeField] private MMF_Player shopMmfPlayer;
+
         
         private CanvasGroup _canvasGroup;
-
     
         public UnityEvent<GameItem> buyEvent;
 
@@ -24,7 +26,6 @@ namespace UI.Shop
             _canvasGroup = gameObject.GetComponent<CanvasGroup>();
             container = _canvasGroup.gameObject.transform.Find("Container");
             closeBtn.onClick.AddListener(Hide);
-            Hide();
         }
 
         private void CreateShopItem(GameItem type)
@@ -66,16 +67,12 @@ namespace UI.Shop
 
         public void Show()
         {
-            _canvasGroup.alpha = 1;
-            _canvasGroup.interactable = true;
-            _canvasGroup.blocksRaycasts = true;
+            shopMmfPlayer.PlayFeedbacks();
         }
     
         public void Hide()
         {
-            _canvasGroup.alpha = 0;
-            _canvasGroup.interactable = false;
-            _canvasGroup.blocksRaycasts = false;
+            shopMmfPlayer.PlayFeedbacks();
         }
         
         //Testing
