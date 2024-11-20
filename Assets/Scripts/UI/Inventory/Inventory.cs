@@ -41,7 +41,7 @@ namespace UI.Inventory
             }
         }
 
-        public void RemoveItem(GameItem rItem)
+        public bool RemoveItem(GameItem rItem)
         {
             int n;
             switch (ShopItem.GetItemType(rItem))
@@ -49,26 +49,30 @@ namespace UI.Inventory
                 case GameItemType.Food:
                     if (foodItems.TryGetValue(rItem, out n))
                     {
-                        if (n > 0) foodItems[rItem]--;
-                        else throw new Exception("No items of this type left");
+                        if (n > 0)
+                        {
+                            foodItems[rItem]--;
+                            return true;
+                        }
                     }
-                    else throw new Exception("No items of this type left");
-
                     break;
 
                 case GameItemType.Toy:
                     if (toyItems.TryGetValue(rItem, out n))
                     {
-                        if (n > 0) toyItems[rItem]--;
-                        else throw new Exception("No items of this type left");
+                        if (n > 0)
+                        {
+                            toyItems[rItem]--;
+                            return true;
+                        }
                     }
-                    else throw new Exception("No items of this type left");
-
                     break;
                 
                 default:
                     throw new Exception("Item type not defined");
             }
+
+            return false;
         }
 
         [ContextMenu("Show inventory")]
