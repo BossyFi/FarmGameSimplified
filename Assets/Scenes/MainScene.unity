@@ -471,7 +471,7 @@ Transform:
   m_GameObject: {fileID: 419898088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0.5, z: 0}
+  m_LocalPosition: {x: 4, y: 0.5, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2235,7 +2235,7 @@ Transform:
   m_GameObject: {fileID: 1454179851}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0.5, z: -2}
+  m_LocalPosition: {x: 4, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2552,9 +2552,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505704d09649144f9b96d60532d50002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 2
   animal: {fileID: 638954177}
   target: {fileID: 419898089}
+  actionDuration: 3
 --- !u!1 &1773480903
 GameObject:
   m_ObjectHideFlags: 0
@@ -2713,9 +2714,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505704d09649144f9b96d60532d50002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   animal: {fileID: 638954177}
   target: {fileID: 1454179852}
+  actionDuration: 4
 --- !u!1001 &1883160704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3138,6 +3140,7 @@ MonoBehaviour:
   type: 0
   animal: {fileID: 638954177}
   target: {fileID: 939259494}
+  actionDuration: 2
 --- !u!1001 &3361119530213106158
 PrefabInstance:
   m_ObjectHideFlags: 0
