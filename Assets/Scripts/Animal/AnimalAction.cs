@@ -16,12 +16,15 @@ public class AnimalAction : MonoBehaviour
     public ActionType type;
     public AnimalBase animal;
     public Transform target;
+    public float actionDuration;
 
     private BehaviorGraphAgent _agent;
+    private Clickable _clickable;
 
     private void Start()
     {
         _agent = animal.GetComponent<BehaviorGraphAgent>();
+        _clickable = animal.GetComponentInParent<Clickable>();
     }
 
     public void Execute()
@@ -38,7 +41,7 @@ public class AnimalAction : MonoBehaviour
     private IEnumerator RotateAndMoveTowardsTarget()
     {
         if (target == null) yield break;
-
+        _clickable.enabled = false;
         // **ROTACIÓN**
         // Calcula la rotación inicial y final
         Quaternion initialRotation = animal.transform.rotation;
@@ -93,6 +96,27 @@ public class AnimalAction : MonoBehaviour
         if (animator != null)
         {
             animator.SetFloat("Speed", 0f);
+            switch (type)
+            {
+                case ActionType.Feed:
+                    animator.Play("Eat");
+                    animator.Play("Eyes_Happy");
+                    break;
+                case ActionType.Entertain:
+                    animator.Play("Spin");
+                    animator.Play("Eyes_Spin");
+                    break;
+                case ActionType.Heal:
+                    animator.Play("Swim");
+                    animator.Play("Eyes_Happy");
+                    break;
+            }
+
+            yield return new WaitForSeconds(actionDuration);
+            animator.Play("Walk");
+            animator.Play("Eyes_Blink");
+            _agent.Start();
+            _clickable.enabled = true;
         }
     }
 }
