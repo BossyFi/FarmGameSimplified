@@ -8,7 +8,9 @@ namespace UI.Shop
     {
         Item1,
         Item2,
-        Item3
+        Item3,
+        Item4,
+        Item5
     }
 
     public enum GameItemType
@@ -19,9 +21,8 @@ namespace UI.Shop
     
     public abstract class ShopItem
     {
-        public GameItemType Type;
 
-        public static int GetCost(GameItem gameItem)
+        public static int GetPrize(GameItem gameItem)
         {
             //Max price == 999999
             switch (gameItem)
@@ -32,6 +33,13 @@ namespace UI.Shop
                     return ShopAssets.Instance.item2Cost;
                 case GameItem.Item3: 
                     return ShopAssets.Instance.item3Cost;
+
+                case GameItem.Item4:
+                    return ShopAssets.Instance.item4Cost;
+                
+                case GameItem.Item5:
+                    return ShopAssets.Instance.item5Cost;
+                
                 default: return 0;
             }
         }
@@ -46,6 +54,10 @@ namespace UI.Shop
                     return ShopAssets.Instance.spriteItem2;
                 case GameItem.Item3: 
                     return ShopAssets.Instance.spriteItem3;
+                case GameItem.Item4:
+                    return ShopAssets.Instance.spriteItem4;
+                case GameItem.Item5:
+                    return ShopAssets.Instance.spriteItem5;
                 default: 
                     return null;
             }
@@ -61,6 +73,10 @@ namespace UI.Shop
                     return ShopAssets.Instance.item2Type;
                 case GameItem.Item3:
                     return ShopAssets.Instance.item3Type;
+                case GameItem.Item4:
+                    return ShopAssets.Instance.item4Type;
+                case GameItem.Item5:
+                    return ShopAssets.Instance.item5Type;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameItem), gameItem, null);
             }

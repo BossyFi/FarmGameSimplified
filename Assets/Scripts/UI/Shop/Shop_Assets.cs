@@ -35,5 +35,17 @@ namespace UI.Shop
         public GameItemType item3Type;
 
         
+        [Space(1)] [Header("Item4")]
+        public Sprite spriteItem4;
+        public int item4Cost;
+        public GameItemType item4Type;
+
+        
+        [Space(1)] [Header("Item5")]
+        public Sprite spriteItem5;
+        public int item5Cost;
+        public GameItemType item5Type;
+
+        
     }
 }

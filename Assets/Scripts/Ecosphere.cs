@@ -41,7 +41,7 @@ public class EcoSphere : MonoBehaviour
 
     public void BuyItem(GameItem gameItem)
     {
-        int cost = ShopItem.GetCost(gameItem);
+        int cost = ShopItem.GetPrize(gameItem);
         if (cost > money)
         {
             Debug.Log("Unable to buy Item");
