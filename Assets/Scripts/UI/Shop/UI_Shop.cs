@@ -15,7 +15,6 @@ namespace UI.Shop
         [SerializeField] private MMF_Player shopMmfPlayer;
 
         
-        private CanvasGroup _canvasGroup;
     
         public UnityEvent<GameItem> buyEvent;
 
@@ -23,8 +22,6 @@ namespace UI.Shop
 
         private void Awake()
         {
-            _canvasGroup = gameObject.GetComponent<CanvasGroup>();
-            container = _canvasGroup.gameObject.transform.Find("Container");
             closeBtn.onClick.AddListener(Hide);
         }
 

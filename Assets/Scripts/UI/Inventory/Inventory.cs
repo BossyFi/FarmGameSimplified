@@ -9,8 +9,8 @@ namespace UI.Inventory
     {
         public static Inventory Instance;
 
-        public List<GameItem> foodItems;
-        public List<GameItem> toyItems;
+        public Dictionary<GameItem, int> foodItems;
+        public Dictionary<GameItem, int> toyItems;
 
         private void Awake()
         {
@@ -18,8 +18,8 @@ namespace UI.Inventory
             if (Instance != null && Instance != this) Destroy(gameObject);
             else Instance = this;
 
-            foodItems = new List<GameItem>();
-            toyItems = new List<GameItem>();
+            foodItems = new Dictionary<GameItem, int>();
+            toyItems = new Dictionary<GameItem, int>();
         }
 
         public void AddItem(GameItem newItem)
@@ -27,15 +27,74 @@ namespace UI.Inventory
             switch (ShopItem.GetItemType(newItem))
             {
                 case GameItemType.Food:
-                    foodItems.Add(newItem);
+                    if (foodItems.TryGetValue(newItem, out _)) foodItems[newItem]++;
+                    else foodItems.Add(newItem, 1);
                     break;
+
                 case GameItemType.Toy:
-                    toyItems.Add(newItem);
+                    if (toyItems.TryGetValue(newItem, out _)) toyItems[newItem]++;
+                    else toyItems.Add(newItem, 1);
                     break;
+
                 default:
                     throw new Exception("Item type not defined");
             }
         }
 
+        public void RemoveItem(GameItem rItem)
+        {
+            int n;
+            switch (ShopItem.GetItemType(rItem))
+            {
+                case GameItemType.Food:
+                    if (foodItems.TryGetValue(rItem, out n))
+                    {
+                        if (n > 0) foodItems[rItem]--;
+                        else throw new Exception("No items of this type left");
+                    }
+                    else throw new Exception("No items of this type left");
+
+                    break;
+
+                case GameItemType.Toy:
+                    if (toyItems.TryGetValue(rItem, out n))
+                    {
+                        if (n > 0) toyItems[rItem]--;
+                        else throw new Exception("No items of this type left");
+                    }
+                    else throw new Exception("No items of this type left");
+
+                    break;
+                
+                default:
+                    throw new Exception("Item type not defined");
+            }
+        }
+
+        [ContextMenu("Show inventory")]
+        void ShowInventory()
+        {
+            Debug.Log("Food: ");
+            foreach (KeyValuePair<GameItem,int> food in foodItems)
+            {
+                Debug.Log(food.Key + ": " + food.Value);
+            }
+            Debug.Log("Toy: ");
+            foreach (KeyValuePair<GameItem,int> toy in toyItems)
+            {
+                Debug.Log(toy.Key + ": " + toy.Value);
+            }
+        }
+
+        [ContextMenu("Remove 3")]
+        void RemoveXOfEach()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                RemoveItem(GameItem.Item1);
+                RemoveItem(GameItem.Item2);
+                RemoveItem(GameItem.Item3);
+            }
+        }
     }
 }
