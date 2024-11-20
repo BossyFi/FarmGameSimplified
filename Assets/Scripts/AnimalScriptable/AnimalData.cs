@@ -20,8 +20,6 @@ namespace AnimalScriptable
         public AnimationCurve entertainmentCurve = AnimationCurve.EaseInOut(0, 1, 1, 0);
         public AnimationCurve healthCurve = AnimationCurve.EaseInOut(0, 1, 1, 0);
 
-        public ShopItem.ItemType favFood = ShopItem.ItemType.Item1;
-
         [Range(0, 1)] public float startCryingHunger = 0.7f;
         [Range(0, 1)] public float startCryingEntertainment = 0.5f;
         [Range(0, 1)] public float startCryingHealth = 0.3f;

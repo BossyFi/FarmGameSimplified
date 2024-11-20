@@ -45,5 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteItem1: {fileID: 21300000, guid: e092f37f37a9e8f4ea58b84ef4d3bc35, type: 3}
+  item1Cost: 10
+  item1Type: 0
   spriteItem2: {fileID: 21300000, guid: 44786fe1d28031d4aa30c9541591403c, type: 3}
+  item2Cost: 30
+  item2Type: 0
   spriteItem3: {fileID: 21300000, guid: d322e9f2050d8e74b80c19112df9f75e, type: 3}
+  item3Cost: 50
+  item3Type: 1

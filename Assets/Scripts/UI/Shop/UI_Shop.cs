@@ -15,7 +15,7 @@ namespace UI.Shop
         private CanvasGroup _canvasGroup;
 
     
-        public UnityEvent<ShopItem.ItemType> buyEvent;
+        public UnityEvent<GameItem> buyEvent;
 
         private UIMediator _mediator;
 
@@ -27,7 +27,7 @@ namespace UI.Shop
             Hide();
         }
 
-        private void CreateShopItem(ShopItem.ItemType type)
+        private void CreateShopItem(GameItem type)
         {
             //Instantiate the new UI element
             Transform newShopItem = Instantiate(shopItemTemplate.transform, container);
@@ -54,9 +54,9 @@ namespace UI.Shop
 
         }
 
-        private void Buy(ShopItem.ItemType item)
+        private void Buy(GameItem gameItem)
         {
-            buyEvent.Invoke(item);
+            buyEvent.Invoke(gameItem);
         }
 
         public void Configure(UIMediator mediator)
@@ -83,9 +83,9 @@ namespace UI.Shop
         [ContextMenu("Create items")]
         public void CreateItem1()
         {
-            CreateShopItem(ShopItem.ItemType.Item1);
-            CreateShopItem(ShopItem.ItemType.Item2);
-            CreateShopItem(ShopItem.ItemType.Item3);
+            CreateShopItem(GameItem.Item1);
+            CreateShopItem(GameItem.Item2);
+            CreateShopItem(GameItem.Item3);
         }
     }
 }

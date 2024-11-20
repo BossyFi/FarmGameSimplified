@@ -17,8 +17,23 @@ namespace UI.Shop
             }
         }
         
+        [Space(1)] [Header("Item1")]
         public Sprite spriteItem1;
+        public int item1Cost;
+        public GameItemType item1Type;
+        
+        
+        [Space(1)] [Header("Item2")]
         public Sprite spriteItem2;
+        public int item2Cost;
+        public GameItemType item2Type;
+
+        
+        [Space(1)] [Header("Item3")]
         public Sprite spriteItem3;
+        public int item3Cost;
+        public GameItemType item3Type;
+
+        
     }
 }

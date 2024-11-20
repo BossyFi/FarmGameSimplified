@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Animal;
 using UI;
+using UI.Inventory;
 using UI.Shop;
 using UnityEngine;
 
@@ -38,9 +39,9 @@ public class EcoSphere : MonoBehaviour
         CollectionLoop();
     }
 
-    public void BuyItem(ShopItem.ItemType item)
+    public void BuyItem(GameItem gameItem)
     {
-        int cost = ShopItem.GetCost(item);
+        int cost = ShopItem.GetCost(gameItem);
         if (cost > money)
         {
             Debug.Log("Unable to buy Item");
@@ -48,8 +49,8 @@ public class EcoSphere : MonoBehaviour
         else
         {
             money -= cost;
-            // moneyUpdatedEvent.Invoke(money);
             MoneyUpdateEvent.Trigger(money, -cost);
+            Inventory.Instance.AddItem(gameItem);
         }
     }
 
