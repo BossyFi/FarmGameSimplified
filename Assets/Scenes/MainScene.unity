@@ -175,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 40380550}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1096,7 +1096,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1450,7 +1450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439221388}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.6469944, z: -0, w: 0.76249474}
+  m_LocalRotation: {x: -0, y: -0.2772487, z: -0, w: 0.9607982}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19467,11 +19467,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8469812898689155455, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -24.999939
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 8469812898689155455, guid: 31d996261387c9a4fb9d329426ecc31c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -24.999878
+      value: -25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
