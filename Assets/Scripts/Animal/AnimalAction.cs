@@ -82,10 +82,11 @@ public class AnimalAction : MonoBehaviour
                 animator.SetFloat("Speed", currentSpeed);
             }
 
+            Vector3 targetPosition = new Vector3(target.position.x, animal.transform.position.y, target.position.z);
             // Mueve al objeto hacia el objetivo
             animal.transform.position = Vector3.MoveTowards(
                 animal.transform.position,
-                target.position,
+                targetPosition,
                 currentSpeed * Time.deltaTime
             );
 
