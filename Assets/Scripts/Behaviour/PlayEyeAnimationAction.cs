@@ -13,15 +13,18 @@ public partial class PlayEyeAnimationAction : Action
     [SerializeReference] public BlackboardVariable<Animator> Animator;
 
     private AnimalBase _animalBase;
+    private Animator _animator;
     private bool _isHappy;
 
     protected override Status OnStart()
     {
-        if (!Animator?.Value)
+        _animator = GameObject.GetComponent(typeof(Animator)) as Animator;
+        if (_animator == null)
         {
             return Status.Failure;
         }
 
+        Animator.Value = _animator;
         _animalBase = Animator.Value.GetComponent<AnimalBase>();
         _isHappy = _animalBase.GetBoolStats();
         Animator.Value.Play(_isHappy ? "Eyes_Happy" : "Eyes_Sad");

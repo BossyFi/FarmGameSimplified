@@ -18,7 +18,7 @@ namespace Items
         {
             try
             {
-                return ItemAssets.Instance.items[itemCode].name;
+                return ItemAssets.Instance.items[itemCode].itemName;
             }
             catch
             {
