@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using UnityEditor;
 using UnityEngine;
 
@@ -40,11 +41,11 @@ public class AddScriptsAndPrefabsTool : EditorWindow
 
         GameObject selectedObject = Selection.activeGameObject;
 
-        // Añadir los scripts
-        AddScriptsToGameObject(selectedObject);
-
         // Buscar y añadir los prefabs
         AddPrefabsFromFolder(selectedObject);
+
+        // Añadir los scripts
+        AddScriptsToGameObject(selectedObject);
     }
 
     private void AddScriptsToGameObject(GameObject obj)
@@ -75,6 +76,26 @@ public class AddScriptsAndPrefabsTool : EditorWindow
 
             // Si no existe, lo añade
             obj.AddComponent(scriptType);
+            if (scriptName == "Animal.AnimalBase")
+            {
+                obj.GetComponent<Animal.AnimalBase>().hungerFeedback =
+                    obj.gameObject.transform.Find("Feedbacks").Find("HungerFeedback").GetComponent<MMF_Player>();
+                obj.GetComponent<Animal.AnimalBase>().boredFeedback =
+                    obj.gameObject.transform.Find("Feedbacks").Find("BoredFeedback").GetComponent<MMF_Player>();
+                obj.GetComponent<Animal.AnimalBase>().sickFeedback =
+                    obj.gameObject.transform.Find("Feedbacks").Find("SickFeedback").GetComponent<MMF_Player>();
+            }
+            else if (scriptName == "Unity.Behavior.BehaviorGraphAgent")
+            {
+                AssignGraphAssetToComponent(obj);
+            }
+
+            else if (scriptName == "Clickable")
+            {
+                obj.GetComponent<Clickable>().clickFeedback =
+                    obj.gameObject.transform.parent.Find("Action Menu").Find("Panel").GetComponent<MMF_Player>();
+            }
+
             Debug.Log($"Added '{scriptName}' to {obj.name}.");
         }
     }
@@ -135,6 +156,35 @@ public class AddScriptsAndPrefabsTool : EditorWindow
         else
         {
             Debug.LogError($"Failed to instantiate prefab {prefab.name}.");
+        }
+    }
+
+    private void AssignGraphAssetToComponent(GameObject gameObject)
+    {
+        // Verificar si el GameObject tiene el componente BehaviorGraphAgent
+        var behaviorGraphAgent = gameObject.GetComponent<Unity.Behavior.BehaviorGraphAgent>();
+        if (behaviorGraphAgent != null)
+        {
+            // Buscar el Asset "NormalBehavior" en el proyecto
+            string[] assetGUIDs = AssetDatabase.FindAssets("t:Unity.Behavior.BehaviorGraph NormalBehaviour");
+            if (assetGUIDs.Length > 0)
+            {
+                // Obtener el primer Asset encontrado
+                string assetPath = AssetDatabase.GUIDToAssetPath(assetGUIDs[0]);
+                var graphAsset = AssetDatabase.LoadAssetAtPath<Unity.Behavior.BehaviorGraph>(assetPath);
+
+                // Asignar el Asset a la propiedad 'Graph'
+                behaviorGraphAgent.Graph = graphAsset;
+                Debug.Log($"Assigned asset {graphAsset.name} to the Graph property of {gameObject.name}.");
+            }
+            else
+            {
+                Debug.LogWarning("No asset named 'NormalBehavior' found in the project.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"{gameObject.name} does not have a BehaviorGraphAgent component.");
         }
     }
 }
