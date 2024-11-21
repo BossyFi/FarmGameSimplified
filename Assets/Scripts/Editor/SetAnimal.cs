@@ -13,7 +13,7 @@ public class AddScriptsAndPrefabsTool : EditorWindow
 
     private string prefabsFolderPath = "Assets/Prefabs/Animals"; // Carpeta de prefabs
 
-    [MenuItem("Tools/Add Scripts and Prefabs")]
+    [MenuItem("Tools/Configure Animal")]
     public static void ShowWindow()
     {
         GetWindow<AddScriptsAndPrefabsTool>("Add Scripts and Prefabs");
