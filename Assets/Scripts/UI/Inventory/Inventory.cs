@@ -12,6 +12,7 @@ namespace UI.Inventory
 
         public Dictionary<int, int> foodItems;
         public Dictionary<int, int> toyItems;
+        public Dictionary<int, int> medItems;
 
         private void Awake()
         {
@@ -21,6 +22,7 @@ namespace UI.Inventory
 
             foodItems = new Dictionary<int, int>();
             toyItems = new Dictionary<int, int>();
+            medItems = new Dictionary<int, int>();
         }
 
         public void AddItem(int newItem)
@@ -28,13 +30,15 @@ namespace UI.Inventory
             switch (ItemData.GetItemType(newItem))
             {
                 case GameItemType.Food:
-                    if (foodItems.TryGetValue(newItem, out _)) foodItems[newItem]++;
-                    else foodItems.Add(newItem, 1);
+                    AddItemDefault(ref foodItems, newItem);
                     break;
 
                 case GameItemType.Toy:
-                    if (toyItems.TryGetValue(newItem, out _)) toyItems[newItem]++;
-                    else toyItems.Add(newItem, 1);
+                    AddItemDefault(ref toyItems, newItem);
+                    break;
+
+                case GameItemType.Medicine:
+                    AddItemDefault(ref medItems, newItem);
                     break;
 
                 default:
@@ -42,35 +46,34 @@ namespace UI.Inventory
             }
         }
 
+        private void AddItemDefault(ref Dictionary<int, int> itemDic, int itemCode)
+        {
+            if (itemDic.TryGetValue(itemCode, out var itemCount)) itemDic[itemCode]++;
+            else itemDic.Add(itemCode, 1);
+            InventoryUpdate.Trigger(itemCode, itemCount + 1, itemCount);
+        }
+
         public bool RemoveItem(int rItem)
         {
-            int n;
-            switch (ItemData.GetItemType(rItem))
+            return ItemData.GetItemType(rItem) switch
             {
-                case GameItemType.Food:
-                    if (foodItems.TryGetValue(rItem, out n))
-                    {
-                        if (n > 0)
-                        {
-                            foodItems[rItem]--;
-                            return true;
-                        }
-                    }
-                    break;
+                GameItemType.Food => RemoveItemDefault(foodItems, rItem),
+                GameItemType.Toy => RemoveItemDefault(toyItems, rItem),
+                GameItemType.Medicine => RemoveItemDefault(medItems, rItem),
+                _ => throw new Exception("Item type not defined")
+            };
+        }
 
-                case GameItemType.Toy:
-                    if (toyItems.TryGetValue(rItem, out n))
-                    {
-                        if (n > 0)
-                        {
-                            toyItems[rItem]--;
-                            return true;
-                        }
-                    }
-                    break;
-                
-                default:
-                    throw new Exception("Item type not defined");
+        private bool RemoveItemDefault(Dictionary<int, int> itemDic, int itemCode)
+        {
+            if (itemDic.TryGetValue(itemCode, out var itemCount))
+            {
+                if (itemCount > 0)
+                {
+                    itemDic[itemCode]--;
+                    InventoryUpdate.Trigger(itemCode, itemCount - 1, itemCount);
+                    return true;
+                }
             }
 
             return false;
@@ -80,12 +83,13 @@ namespace UI.Inventory
         void ShowInventory()
         {
             Debug.Log("Food: ");
-            foreach (KeyValuePair<int,int> food in foodItems)
+            foreach (KeyValuePair<int, int> food in foodItems)
             {
                 Debug.Log(food.Key + ": " + food.Value);
             }
+
             Debug.Log("Toy: ");
-            foreach (KeyValuePair<int,int> toy in toyItems)
+            foreach (KeyValuePair<int, int> toy in toyItems)
             {
                 Debug.Log(toy.Key + ": " + toy.Value);
             }

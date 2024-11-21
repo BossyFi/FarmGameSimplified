@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using Items;
 using MoreMountains.Feedbacks;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -12,76 +10,78 @@ namespace UI.Shop
 {
     public class UIShop : MonoBehaviour
     {
-        [SerializeField] private Transform container;
-        [SerializeField] private GameObject shopItemTemplate;
-        [SerializeField] private Button closeBtn;
-        [SerializeField] private MMF_Player shopMmfPlayer;
-
-        public LinkedList<KeyValuePair<int, int>> shopItems;
-
         public UnityEvent<int> buyEvent;
+        public bool isOpen;
+
+        [Space(1)] [Header("BUTTONS")] [SerializeField]
+        private Button foodBtn;
+
+        [SerializeField] private Button toyBtn;
+        [SerializeField] private Button medBtn;
+        [SerializeField] private Button closeBtn;
+
+        [Space(1)] [Header("CONTAINERS")] [SerializeField]
+        private Transform foodContainer;
+
+        [SerializeField] private Transform toyContainer;
+        [SerializeField] private Transform medContainer;
+
+        [Space(1)] [Header("ITEM TEMPLATE")] [SerializeField]
+        private GameObject shopItemTemplate;
+
+        [Space(1)] [Header("MMF_PLAYER")] [SerializeField]
+        private MMF_Player shopMmfPlayer;
+
+        //Lists for sorting purpose
+        private LinkedList<KeyValuePair<int, int>> _shopFoodItems;
+        private LinkedList<KeyValuePair<int, int>> _shopToyItems;
+        private LinkedList<KeyValuePair<int, int>> _shopMedItems;
+
 
         private UIMediator _mediator;
 
+
         private void Awake()
         {
-            shopItems = new LinkedList<KeyValuePair<int, int>>();
-            closeBtn.onClick.AddListener(Hide);
+            _shopFoodItems = new LinkedList<KeyValuePair<int, int>>();
+            _shopToyItems = new LinkedList<KeyValuePair<int, int>>();
+            _shopMedItems = new LinkedList<KeyValuePair<int, int>>();
+            closeBtn.onClick.AddListener(Close);
+            foodBtn.onClick.AddListener(() => ShowContainer(GameItemType.Food));
+            toyBtn.onClick.AddListener(() => ShowContainer(GameItemType.Toy));
+            medBtn.onClick.AddListener(() => ShowContainer(GameItemType.Medicine));
+            ShowContainer(GameItemType.Food);
         }
 
         private void CreateShopItem(int itemCode)
         {
-            //Check if the item already exists and if it doesnt, add it to the sorted list
-            int itemPrize = ItemData.GetPrize(itemCode);
-            string itemName = ItemData.GetName(itemCode);
-            var pair = new KeyValuePair<int, int>(itemCode, itemPrize);
-            int listIdx = 0;
-            if (shopItems.Count == 0) shopItems.AddFirst(pair);
-            else
+            switch (ItemData.GetItemType(itemCode))
             {
-                for (var it = shopItems.First; it != null; it = it?.Next)
-                {
-                    if (it.Value.Value > itemPrize)
-                    {
-                        shopItems.AddBefore(it, pair);
-                        break;
-                    }
-
-                    if (it.Value.Value == itemPrize)
-                    {
-                        int comparison = String.CompareOrdinal(itemName, ItemData.GetName(it.Value.Key));
-                        if (comparison == 0) return;
-                        if (comparison < 0)
-                        {
-                            shopItems.AddBefore(it, pair);
-                            break;
-                        }
-                    }
-
-                    if (it.Next != null)
-                    {
-                        listIdx++;
-                        continue;
-                    }
-                    shopItems.AddLast(pair);
-                    listIdx++;
+                case GameItemType.Food:
+                    CreateShopItemDefault(itemCode, ref _shopFoodItems, ref foodContainer);
                     break;
-
-                }
+                case GameItemType.Toy:
+                    CreateShopItemDefault(itemCode, ref _shopToyItems, ref toyContainer);
+                    break;
+                case GameItemType.Medicine:
+                    CreateShopItemDefault(itemCode, ref _shopMedItems, ref medContainer);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
+        }
+        private void CreateShopItemDefault(int itemCode, ref LinkedList<KeyValuePair<int, int>> shopItems,
+            ref Transform container)
+        {
+            //Check if the item already exists and if it doesnt, add it to the sorted list
+            int listIdx = UIUtils.AddItemSorted(ref shopItems, itemCode);
+            if (listIdx < 0) return;
 
             //Instantiate the new UI element
             Transform newShopItem = Instantiate(shopItemTemplate.transform, container);
 
             //Configure the element according to the item
-            newShopItem.Find("ItemName").GetComponent<TextMeshProUGUI>().SetText(itemName);
-            newShopItem.Find("ItemPrize").GetComponent<TextMeshProUGUI>().SetText(itemPrize.ToString());
-            newShopItem.Find("ItemSprite").GetComponent<Image>().sprite = ItemData.GetSprite(itemCode);
-            
-            //Place it sorted by prize
-            newShopItem.SetSiblingIndex(listIdx);
-
-            newShopItem.gameObject.SetActive(true);
+            UIUtils.ConfigureItemUI(ref newShopItem, itemCode, listIdx);
 
             Button newItemBtn = newShopItem.GetComponent<Button>();
             if (newItemBtn)
@@ -104,15 +104,44 @@ namespace UI.Shop
             _mediator = mediator;
         }
 
-        public void Show()
+        public void Open()
         {
+            if (isOpen) return;
             shopMmfPlayer.PlayFeedbacks();
+            isOpen = true;
         }
 
-        public void Hide()
+        public void Close()
         {
+            if(!isOpen) return;
             shopMmfPlayer.PlayFeedbacks();
+            isOpen = false;
         }
+        
+        public void ShowContainer(GameItemType containerType)
+        {
+            switch (containerType)
+            {
+                case GameItemType.Food:
+                    foodContainer.gameObject.SetActive(true);
+                    toyContainer.gameObject.SetActive(false);
+                    medContainer.gameObject.SetActive(false);
+                    break;
+                case GameItemType.Toy:
+                    foodContainer.gameObject.SetActive(false);
+                    toyContainer.gameObject.SetActive(true);
+                    medContainer.gameObject.SetActive(false);
+                    break;
+                case GameItemType.Medicine:
+                    foodContainer.gameObject.SetActive(false);
+                    toyContainer.gameObject.SetActive(false);
+                    medContainer.gameObject.SetActive(true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(containerType), containerType, null);
+            }
+        }
+
 
         //Testing
 
@@ -123,6 +152,7 @@ namespace UI.Shop
             CreateShopItem(1);
             CreateShopItem(2);
         }
+
         [ContextMenu("Create items 2")]
         public void CreateItem2()
         {

@@ -33,6 +33,11 @@ public class EcoSphere : MonoBehaviour
 
     private UIMediator _uiMediator;
 
+    private void Awake()
+    {
+        _uiMediator = GameObject.FindGameObjectWithTag("UI").GetComponent<UIMediator>();
+    }
+
     private void Start()
     {
         // moneyUpdatedEvent.Invoke(money);
