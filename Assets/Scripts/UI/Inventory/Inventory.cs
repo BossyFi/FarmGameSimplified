@@ -10,8 +10,8 @@ namespace UI.Inventory
     {
         public static Inventory Instance;
 
-        public Dictionary<GameItem, int> foodItems;
-        public Dictionary<GameItem, int> toyItems;
+        public Dictionary<int, int> foodItems;
+        public Dictionary<int, int> toyItems;
 
         private void Awake()
         {
@@ -19,11 +19,11 @@ namespace UI.Inventory
             if (Instance != null && Instance != this) Destroy(gameObject);
             else Instance = this;
 
-            foodItems = new Dictionary<GameItem, int>();
-            toyItems = new Dictionary<GameItem, int>();
+            foodItems = new Dictionary<int, int>();
+            toyItems = new Dictionary<int, int>();
         }
 
-        public void AddItem(GameItem newItem)
+        public void AddItem(int newItem)
         {
             switch (ItemData.GetItemType(newItem))
             {
@@ -42,7 +42,7 @@ namespace UI.Inventory
             }
         }
 
-        public bool RemoveItem(GameItem rItem)
+        public bool RemoveItem(int rItem)
         {
             int n;
             switch (ItemData.GetItemType(rItem))
@@ -80,12 +80,12 @@ namespace UI.Inventory
         void ShowInventory()
         {
             Debug.Log("Food: ");
-            foreach (KeyValuePair<GameItem,int> food in foodItems)
+            foreach (KeyValuePair<int,int> food in foodItems)
             {
                 Debug.Log(food.Key + ": " + food.Value);
             }
             Debug.Log("Toy: ");
-            foreach (KeyValuePair<GameItem,int> toy in toyItems)
+            foreach (KeyValuePair<int,int> toy in toyItems)
             {
                 Debug.Log(toy.Key + ": " + toy.Value);
             }
@@ -96,9 +96,9 @@ namespace UI.Inventory
         {
             for (int i = 0; i < 3; i++)
             {
-                RemoveItem(GameItem.Item1);
-                RemoveItem(GameItem.Item2);
-                RemoveItem(GameItem.Item3);
+                RemoveItem(0);
+                RemoveItem(1);
+                RemoveItem(2);
             }
         }
     }

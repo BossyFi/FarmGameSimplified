@@ -40,7 +40,7 @@ public class EcoSphere : MonoBehaviour
         CollectionLoop();
     }
 
-    public void BuyItem(GameItem gameItem)
+    public void BuyItem(int gameItem)
     {
         int cost = ItemData.GetPrize(gameItem);
         if (cost > money)

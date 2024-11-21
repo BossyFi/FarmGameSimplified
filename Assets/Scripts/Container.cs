@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class Container : MonoBehaviour
 {
-    [SerializeField] private GameItem content;
+    [SerializeField] private int content;
     
   
-    public void SetItemContainer(GameItem item)
+    public void SetItemContainer(int item)
     {
         content = item;
     }

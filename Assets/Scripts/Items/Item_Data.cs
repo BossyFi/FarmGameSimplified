@@ -4,14 +4,6 @@ using UnityEngine;
 namespace Items
 {
     
-    public enum GameItem
-    {
-        Item1 = 0,
-        Item2 = 1,
-        Item3 = 2,
-        Item4 = 3,
-        Item5 = 4
-    }
 
     public enum GameItemType
     {
@@ -22,53 +14,53 @@ namespace Items
     public abstract class ItemData
     {
 
-        public static string GetName(GameItem gameItem)
+        public static string GetName(int itemCode)
         {
             try
             {
-                return ItemAssets.Instance.items[(int)gameItem].name;
+                return ItemAssets.Instance.items[itemCode].name;
             }
             catch
             {
-                throw new ArgumentOutOfRangeException(nameof(gameItem), gameItem, 
+                throw new ArgumentOutOfRangeException(nameof(itemCode), itemCode, 
                     "The selected item does not exist in ShopAssets");
             }
         }
-        public static int GetPrize(GameItem gameItem)
+        public static int GetPrize(int itemCode)
         {
             try
             {
-                return ItemAssets.Instance.items[(int)gameItem].itemPrize;
+                return ItemAssets.Instance.items[itemCode].itemPrize;
             }
             catch
             {
-                throw new ArgumentOutOfRangeException(nameof(gameItem), gameItem, 
-                    "The selected item does not exist in ShopAssets");
-            }
-        }
-
-        public static Sprite GetSprite(GameItem gameItem)
-        {
-            try
-            {
-                return ItemAssets.Instance.items[(int)gameItem].itemSprite;
-            }
-            catch
-            {
-                throw new ArgumentOutOfRangeException(nameof(gameItem), gameItem, 
+                throw new ArgumentOutOfRangeException(nameof(itemCode), itemCode, 
                     "The selected item does not exist in ShopAssets");
             }
         }
 
-        public static GameItemType GetItemType(GameItem gameItem)
+        public static Sprite GetSprite(int itemCode)
         {
             try
             {
-                return ItemAssets.Instance.items[(int)gameItem].itemType;
+                return ItemAssets.Instance.items[itemCode].itemSprite;
             }
             catch
             {
-                throw new ArgumentOutOfRangeException(nameof(gameItem), gameItem, 
+                throw new ArgumentOutOfRangeException(nameof(itemCode), itemCode, 
+                    "The selected item does not exist in ShopAssets");
+            }
+        }
+
+        public static GameItemType GetItemType(int itemCode)
+        {
+            try
+            {
+                return ItemAssets.Instance.items[itemCode].itemType;
+            }
+            catch
+            {
+                throw new ArgumentOutOfRangeException(nameof(itemCode), itemCode, 
                     "The selected item does not exist in ShopAssets");
             }
         }

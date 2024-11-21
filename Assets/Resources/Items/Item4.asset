@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Item4
   itemSprite: {fileID: 21300000, guid: d322e9f2050d8e74b80c19112df9f75e, type: 3}
-  itemPrize: 200
+  itemPrize: 20
   itemType: 1

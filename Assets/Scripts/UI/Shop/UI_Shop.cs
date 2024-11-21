@@ -17,38 +17,39 @@ namespace UI.Shop
         [SerializeField] private Button closeBtn;
         [SerializeField] private MMF_Player shopMmfPlayer;
 
-        public LinkedList<KeyValuePair<GameItem, int>> shopItems;
+        public LinkedList<KeyValuePair<int, int>> shopItems;
 
-        public UnityEvent<GameItem> buyEvent;
+        public UnityEvent<int> buyEvent;
 
         private UIMediator _mediator;
 
         private void Awake()
         {
-            shopItems = new LinkedList<KeyValuePair<GameItem, int>>();
+            shopItems = new LinkedList<KeyValuePair<int, int>>();
             closeBtn.onClick.AddListener(Hide);
         }
 
-        private void CreateShopItem(GameItem newItem)
+        private void CreateShopItem(int itemCode)
         {
             //Check if the item already exists and if it doesnt, add it to the sorted list
-            int prize = ItemData.GetPrize(newItem);
-            var pair = new KeyValuePair<GameItem, int>(newItem, prize);
-            int list_idx = 0;
+            int itemPrize = ItemData.GetPrize(itemCode);
+            string itemName = ItemData.GetName(itemCode);
+            var pair = new KeyValuePair<int, int>(itemCode, itemPrize);
+            int listIdx = 0;
             if (shopItems.Count == 0) shopItems.AddFirst(pair);
             else
             {
                 for (var it = shopItems.First; it != null; it = it?.Next)
                 {
-                    if (it.Value.Value > prize)
+                    if (it.Value.Value > itemPrize)
                     {
                         shopItems.AddBefore(it, pair);
                         break;
                     }
 
-                    if (it.Value.Value == prize)
+                    if (it.Value.Value == itemPrize)
                     {
-                        int comparison = String.CompareOrdinal(newItem.ToString(), it.Value.Key.ToString());
+                        int comparison = String.CompareOrdinal(itemName, ItemData.GetName(it.Value.Key));
                         if (comparison == 0) return;
                         if (comparison < 0)
                         {
@@ -59,11 +60,11 @@ namespace UI.Shop
 
                     if (it.Next != null)
                     {
-                        list_idx++;
+                        listIdx++;
                         continue;
                     }
                     shopItems.AddLast(pair);
-                    list_idx++;
+                    listIdx++;
                     break;
 
                 }
@@ -73,18 +74,19 @@ namespace UI.Shop
             Transform newShopItem = Instantiate(shopItemTemplate.transform, container);
 
             //Configure the element according to the item
-            newShopItem.Find("ItemName").GetComponent<TextMeshProUGUI>().SetText(newItem.ToString());
-            newShopItem.Find("ItemPrize").GetComponent<TextMeshProUGUI>().SetText(prize.ToString());
-            newShopItem.Find("ItemSprite").GetComponent<Image>().sprite =
-                ItemData.GetSprite(newItem);
-            newShopItem.SetSiblingIndex(list_idx);
+            newShopItem.Find("ItemName").GetComponent<TextMeshProUGUI>().SetText(itemName);
+            newShopItem.Find("ItemPrize").GetComponent<TextMeshProUGUI>().SetText(itemPrize.ToString());
+            newShopItem.Find("ItemSprite").GetComponent<Image>().sprite = ItemData.GetSprite(itemCode);
+            
+            //Place it sorted by prize
+            newShopItem.SetSiblingIndex(listIdx);
 
             newShopItem.gameObject.SetActive(true);
 
             Button newItemBtn = newShopItem.GetComponent<Button>();
             if (newItemBtn)
             {
-                newItemBtn.onClick.AddListener(() => buyEvent.Invoke(newItem));
+                newItemBtn.onClick.AddListener(() => buyEvent.Invoke(itemCode));
             }
             else
             {
@@ -92,7 +94,7 @@ namespace UI.Shop
             }
         }
 
-        private void Buy(GameItem gameItem)
+        private void Buy(int gameItem)
         {
             buyEvent.Invoke(gameItem);
         }
@@ -117,15 +119,15 @@ namespace UI.Shop
         [ContextMenu("Create items")]
         public void CreateItem1()
         {
-            CreateShopItem(GameItem.Item1);
-            CreateShopItem(GameItem.Item2);
-            CreateShopItem(GameItem.Item3);
+            CreateShopItem(0);
+            CreateShopItem(1);
+            CreateShopItem(2);
         }
         [ContextMenu("Create items 2")]
         public void CreateItem2()
         {
-            CreateShopItem(GameItem.Item4);
-            CreateShopItem(GameItem.Item5);
+            CreateShopItem(3);
+            CreateShopItem(4);
         }
     }
 }
