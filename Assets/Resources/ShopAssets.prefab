@@ -44,18 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39352d3d21a63d4985e5bfd726428cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteItem1: {fileID: 21300000, guid: e092f37f37a9e8f4ea58b84ef4d3bc35, type: 3}
-  item1Cost: 10
-  item1Type: 0
-  spriteItem2: {fileID: 21300000, guid: 44786fe1d28031d4aa30c9541591403c, type: 3}
-  item2Cost: 30
-  item2Type: 0
-  spriteItem3: {fileID: 21300000, guid: d322e9f2050d8e74b80c19112df9f75e, type: 3}
-  item3Cost: 50
-  item3Type: 1
-  spriteItem4: {fileID: 0}
-  item4Cost: 20
-  item4Type: 1
-  spriteItem5: {fileID: 0}
-  item5Cost: 40
-  item5Type: 0
+  items:
+  - {fileID: 11400000, guid: 2502638d56b244f42aa4133d6e115725, type: 2}
+  - {fileID: 11400000, guid: 9a1f560c71337944d9c9ac1aea95a188, type: 2}
+  - {fileID: 11400000, guid: 9f00067078c48e34da848908a02f94db, type: 2}
+  - {fileID: 11400000, guid: 1a2280a6f3e2fe94a84f7f4a9f8fa676, type: 2}
+  - {fileID: 11400000, guid: 523d46ca90d7b0c42bd16528992fd160, type: 2}

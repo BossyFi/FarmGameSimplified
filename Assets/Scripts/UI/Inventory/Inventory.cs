@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Items;
 using UI.Shop;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ namespace UI.Inventory
 
         public void AddItem(GameItem newItem)
         {
-            switch (ShopItem.GetItemType(newItem))
+            switch (ItemData.GetItemType(newItem))
             {
                 case GameItemType.Food:
                     if (foodItems.TryGetValue(newItem, out _)) foodItems[newItem]++;
@@ -44,7 +45,7 @@ namespace UI.Inventory
         public bool RemoveItem(GameItem rItem)
         {
             int n;
-            switch (ShopItem.GetItemType(rItem))
+            switch (ItemData.GetItemType(rItem))
             {
                 case GameItemType.Food:
                     if (foodItems.TryGetValue(rItem, out n))

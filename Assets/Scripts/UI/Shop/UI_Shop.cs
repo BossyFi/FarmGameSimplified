@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Items;
 using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEditor;
@@ -31,7 +32,7 @@ namespace UI.Shop
         private void CreateShopItem(GameItem newItem)
         {
             //Check if the item already exists and if it doesnt, add it to the sorted list
-            int prize = ShopItem.GetPrize(newItem);
+            int prize = ItemData.GetPrize(newItem);
             var pair = new KeyValuePair<GameItem, int>(newItem, prize);
             int list_idx = 0;
             if (shopItems.Count == 0) shopItems.AddFirst(pair);
@@ -75,7 +76,7 @@ namespace UI.Shop
             newShopItem.Find("ItemName").GetComponent<TextMeshProUGUI>().SetText(newItem.ToString());
             newShopItem.Find("ItemPrize").GetComponent<TextMeshProUGUI>().SetText(prize.ToString());
             newShopItem.Find("ItemSprite").GetComponent<Image>().sprite =
-                ShopItem.GetSprite(newItem);
+                ItemData.GetSprite(newItem);
             newShopItem.SetSiblingIndex(list_idx);
 
             newShopItem.gameObject.SetActive(true);

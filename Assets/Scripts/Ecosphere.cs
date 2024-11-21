@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Animal;
+using Items;
 using UI;
 using UI.Inventory;
 using UI.Shop;
@@ -41,7 +42,7 @@ public class EcoSphere : MonoBehaviour
 
     public void BuyItem(GameItem gameItem)
     {
-        int cost = ShopItem.GetPrize(gameItem);
+        int cost = ItemData.GetPrize(gameItem);
         if (cost > money)
         {
             Debug.Log("Unable to buy Item");
