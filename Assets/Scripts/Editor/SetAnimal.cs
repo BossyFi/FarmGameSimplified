@@ -1,11 +1,9 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
-public class AddScriptsTool : EditorWindow
+public class AddScriptsAndPrefabsTool : EditorWindow
 {
-    private GameObject targetGameObject;
-
-    // Lista de scripts que deseas añadir
+    // Variables para los scripts
     private static readonly string[] scriptsToAdd =
     {
         "Animal.AnimalBase", // Con namespace
@@ -13,31 +11,40 @@ public class AddScriptsTool : EditorWindow
         "Unity.Behavior.BehaviorGraphAgent" // Con namespace
     };
 
-    [MenuItem("Tools/Add Scripts Tool")]
+    private string prefabsFolderPath = "Assets/Prefabs/Animals"; // Carpeta de prefabs
+
+    [MenuItem("Tools/Add Scripts and Prefabs")]
     public static void ShowWindow()
     {
-        GetWindow<AddScriptsTool>("Add Scripts Tool");
+        GetWindow<AddScriptsAndPrefabsTool>("Add Scripts and Prefabs");
     }
 
     private void OnGUI()
     {
-        GUILayout.Label("Add Scripts to GameObject", EditorStyles.boldLabel);
+        GUILayout.Label("Add Scripts and Prefabs", EditorStyles.boldLabel);
 
-        // Campo para seleccionar un GameObject
-        targetGameObject =
-            (GameObject)EditorGUILayout.ObjectField("Target GameObject", targetGameObject, typeof(GameObject), true);
-
-        if (GUILayout.Button("Add Scripts"))
+        // Botón para añadir los scripts y prefabs
+        if (GUILayout.Button("Add Scripts and Prefabs to Selected GameObject"))
         {
-            if (targetGameObject != null)
-            {
-                AddScriptsToGameObject(targetGameObject);
-            }
-            else
-            {
-                Debug.LogWarning("Please select a GameObject.");
-            }
+            AddScriptsAndPrefabs();
         }
+    }
+
+    private void AddScriptsAndPrefabs()
+    {
+        if (Selection.activeGameObject == null)
+        {
+            Debug.LogError("No GameObject selected!");
+            return;
+        }
+
+        GameObject selectedObject = Selection.activeGameObject;
+
+        // Añadir los scripts
+        AddScriptsToGameObject(selectedObject);
+
+        // Buscar y añadir los prefabs
+        AddPrefabsFromFolder(selectedObject);
     }
 
     private void AddScriptsToGameObject(GameObject obj)
@@ -86,5 +93,48 @@ public class AddScriptsTool : EditorWindow
 
         // Si no se encuentra, devuelve null
         return null;
+    }
+
+    private void AddPrefabsFromFolder(GameObject parent)
+    {
+        // Buscar todos los prefabs en la carpeta
+        string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab", new[] { prefabsFolderPath });
+
+        if (prefabGUIDs.Length == 0)
+        {
+            Debug.LogWarning($"No prefabs found in folder {prefabsFolderPath}");
+            return;
+        }
+
+        foreach (string guid in prefabGUIDs)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+
+            if (prefab != null)
+            {
+                InstantiatePrefabAsChild(prefab, parent);
+            }
+            else
+            {
+                Debug.LogError($"Failed to load prefab at {assetPath}");
+            }
+        }
+    }
+
+    private void InstantiatePrefabAsChild(GameObject prefab, GameObject parent)
+    {
+        GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab); // Instanciar el prefab
+        if (instance != null)
+        {
+            instance.transform.SetParent(parent.transform); // Hacerlo hijo del GameObject seleccionado
+            instance.transform.localPosition = Vector3.zero; // Opcional: Resetear posición local
+            instance.transform.localRotation = Quaternion.identity; // Opcional: Resetear rotación local
+            Debug.Log($"Prefab {prefab.name} added as a child of {parent.name}.");
+        }
+        else
+        {
+            Debug.LogError($"Failed to instantiate prefab {prefab.name}.");
+        }
     }
 }
