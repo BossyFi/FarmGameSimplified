@@ -4,14 +4,14 @@ using UI.Shop;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Container : MonoBehaviour
+public class Dispenser : MonoBehaviour
 {
     [SerializeField] private int content;
     
   
-    public void SetItemContainer(int item)
+    public void SetItemContainer(int itemCode)
     {
-        content = item;
+        content = itemCode;
     }
 
     public bool UseItem()

@@ -29,13 +29,15 @@ public class EcoSphere : MonoBehaviour
 
     public float collectionT; //Seconds between each call collection 
 
+    public Dispenser activeDispenser;
+    
+    //For Debug
     public List<AnimalBase> animals;
 
-    private UIMediator _uiMediator;
 
     private void Awake()
     {
-        _uiMediator = GameObject.FindGameObjectWithTag("UI").GetComponent<UIMediator>();
+        activeDispenser = null;
     }
 
     private void Start()

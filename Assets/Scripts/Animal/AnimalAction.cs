@@ -20,13 +20,13 @@ public class AnimalAction : MonoBehaviour
 
     private BehaviorGraphAgent _agent;
     private Clickable _clickable;
-    private Container _container;
+    private Dispenser _dispenser;
 
     private void Start()
     {
         _agent = animal.GetComponent<BehaviorGraphAgent>();
         _clickable = animal.GetComponentInParent<Clickable>();
-        _container = animal.GetComponent<Container>();
+        _dispenser = animal.GetComponent<Dispenser>();
     }
 
     public void Execute()
@@ -43,7 +43,7 @@ public class AnimalAction : MonoBehaviour
     private IEnumerator RotateAndMoveTowardsTarget()
     {
         if (target == null) yield break;
-        if (!_container.UseItem()) yield break;
+        if (!_dispenser.UseItem()) yield break;
         _clickable.enabled = false;
         // **ROTACIÓN**
         // Calcula la rotación inicial y final

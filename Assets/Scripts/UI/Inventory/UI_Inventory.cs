@@ -84,8 +84,14 @@ namespace UI.Inventory
 
                     Transform newInventoryItem = Instantiate(inventoryItemTemplate.transform, container);
                     UIUtils.ConfigureItemUI(ref newInventoryItem, itemCode, idx, itemCount);
+                    newInventoryItem.gameObject.GetComponent<Button>().onClick.AddListener(() => AssignToDispenser(itemCode));
                 }
             }
+        }
+
+        private void AssignToDispenser(int itemCode)
+        {
+            
         }
 
         public void ShowContainer(GameItemType containerType)

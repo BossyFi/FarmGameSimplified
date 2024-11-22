@@ -16,7 +16,7 @@ namespace UI.Game
         private void Awake()
         {
             shopBtn.onClick.AddListener(() => _mediator.OpenShop());
-            inventoryBtn.onClick.AddListener(() => _mediator.OpenInventory(GameItemType.Food));
+            inventoryBtn.onClick.AddListener(() => _mediator.OpenInventory(0));
         }
 
         public void Configure(UIMediator uiMediator)
