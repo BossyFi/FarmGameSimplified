@@ -112,16 +112,11 @@ namespace UI.Inventory
             }
         }
 
-        public void Open()
+        public void OpenClose()
         {
             inventoryMmfPlayer.PlayFeedbacks();
-            isOpen = true;
+            isOpen = !isOpen;
         }
 
-        public void Close()
-        {
-            inventoryMmfPlayer.PlayFeedbacks();
-            isOpen = false;
-        }
     }
 }

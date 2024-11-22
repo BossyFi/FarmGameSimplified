@@ -46,7 +46,7 @@ namespace UI.Shop
             _shopFoodItems = new LinkedList<KeyValuePair<int, int>>();
             _shopToyItems = new LinkedList<KeyValuePair<int, int>>();
             _shopMedItems = new LinkedList<KeyValuePair<int, int>>();
-            closeBtn.onClick.AddListener(Close);
+            closeBtn.onClick.AddListener(OpenClose);
             foodBtn.onClick.AddListener(() => ShowContainer(GameItemType.Food));
             toyBtn.onClick.AddListener(() => ShowContainer(GameItemType.Toy));
             medBtn.onClick.AddListener(() => ShowContainer(GameItemType.Medicine));
@@ -104,18 +104,10 @@ namespace UI.Shop
             _mediator = mediator;
         }
 
-        public void Open()
+        public void OpenClose()
         {
-            if (isOpen) return;
             shopMmfPlayer.PlayFeedbacks();
-            isOpen = true;
-        }
-
-        public void Close()
-        {
-            if(!isOpen) return;
-            shopMmfPlayer.PlayFeedbacks();
-            isOpen = false;
+            isOpen = !isOpen;
         }
         
         public void ShowContainer(GameItemType containerType)

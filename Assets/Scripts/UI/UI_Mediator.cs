@@ -30,9 +30,6 @@ namespace UI
 
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<EcoSphere>();
             shopUI.buyEvent.AddListener(_player.BuyItem);
-            
-            inventoryUI.Close();
-            shopUI.Close();
         }
 
         private void OnDisable()
@@ -43,16 +40,16 @@ namespace UI
 
         public void OpenShop()
         {
-            if(inventoryUI.isOpen) inventoryUI.Close();
-            shopUI.Open();
+            if(inventoryUI.isOpen) inventoryUI.OpenClose();
+            shopUI.OpenClose();
         }
 
         public void OpenInventory(GameItemType container)
         {
-            if(shopUI.isOpen) shopUI.Close();
+            if(shopUI.isOpen) shopUI.OpenClose();
             
             inventoryUI.ShowContainer(container);
-            inventoryUI.Open();
+            inventoryUI.OpenClose();
         }
 
         public void UpdateMoney(int moneyCount, int profit)
