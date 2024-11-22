@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class EcoSphere : MonoBehaviour
 {
+    public static EcoSphere Instance;
     public int money = 100;
 
     private bool _isOpen = true;
@@ -37,6 +38,9 @@ public class EcoSphere : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null) Destroy(this.gameObject);
+        else Instance = this;
+        
         activeDispenser = null;
     }
 
@@ -83,5 +87,10 @@ public class EcoSphere : MonoBehaviour
         }
 
         return (int)Math.Truncate(totalHappiness);
+    }
+
+    public void SetActiveDispenser(Dispenser dispenser = null)
+    {
+        activeDispenser = dispenser;
     }
 }

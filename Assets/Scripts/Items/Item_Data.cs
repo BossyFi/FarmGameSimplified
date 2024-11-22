@@ -7,9 +7,9 @@ namespace Items
 
     public enum GameItemType
     {
-        Food,
-        Toy,
-        Medicine
+        Food = 0,
+        Toy = 1,
+        Medicine = 2
     }
     
     public abstract class ItemData

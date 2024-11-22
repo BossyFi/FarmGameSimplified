@@ -91,7 +91,9 @@ namespace UI.Inventory
 
         private void AssignToDispenser(int itemCode)
         {
-            
+            EcoSphere.Instance.activeDispenser.SetItemContainer(itemCode);
+            EcoSphere.Instance.SetActiveDispenser();
+            OpenClose();
         }
 
         public void ShowContainer(GameItemType containerType)

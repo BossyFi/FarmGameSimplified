@@ -26,7 +26,7 @@ public class AnimalAction : MonoBehaviour
     {
         _agent = animal.GetComponent<BehaviorGraphAgent>();
         _clickable = animal.GetComponentInParent<Clickable>();
-        _dispenser = animal.GetComponent<Dispenser>();
+        _dispenser = target.GetComponent<Dispenser>();
     }
 
     public void Execute()
