@@ -13,22 +13,38 @@ namespace UI.Inventory
     {
         public bool isOpen;
 
-        [Space(1)] [Header("CONTAINERS")] 
-        [SerializeField] private Transform foodContainer;
+        [Space(1)] [Header("CONTAINERS")] [SerializeField]
+        private Transform foodContainer;
+
         [SerializeField] private Transform toyContainer;
         [SerializeField] private Transform medContainer;
-        
-        [Space(1)] [Header("ITEM TEMPLATE")] 
-        [SerializeField] private GameObject inventoryItemTemplate;
-        
-        [Space(1)] [Header("MMF_PLAYER")]
-        [SerializeField] private MMF_Player inventoryMmfPlayer;
+
+        [Space(1)] [Header("ITEM TEMPLATE")] [SerializeField]
+        private GameObject inventoryItemTemplate;
+
+        [Space(1)] [Header("BUTTON PANEL")] [SerializeField]
+        private Button close_button;
+
+
+        // [Space(1)] [Header("BUTTON COLORS")] [SerializeField]
+        // private Color normal_color;
+        // private Color selected_color;
+        // private Color normal_color;
+
+        [Space(1)] [Header("MMF_PLAYER")] [SerializeField]
+        private MMF_Player inventoryMmfPlayer;
 
         //Lists for sorting purpose
         private LinkedList<KeyValuePair<int, int>> _foodItems;
         private LinkedList<KeyValuePair<int, int>> _toyItems;
         private LinkedList<KeyValuePair<int, int>> _medItems;
-        
+
+        private Button _selectedFood;
+        private Button _selectedToy;
+        private Button _selectedMed;
+
+        private GameItemType _openContainer = GameItemType.Food;
+
         private UIMediator _mediator;
 
         private void Awake()
@@ -36,6 +52,8 @@ namespace UI.Inventory
             _foodItems = new LinkedList<KeyValuePair<int, int>>();
             _toyItems = new LinkedList<KeyValuePair<int, int>>();
             _medItems = new LinkedList<KeyValuePair<int, int>>();
+
+            close_button.onClick.AddListener(OpenClose);
         }
 
 
@@ -69,13 +87,21 @@ namespace UI.Inventory
             if (itemCount == 0)
             {
                 if (idx < 0) return;
-                container.GetChild(idx).gameObject.SetActive(false);
+                Transform itemUI = container.GetChild(idx);
+                itemUI.gameObject.SetActive(false);
+                // itemUI.GetComponent<Button>().enabled = false;
+                // itemUI.Find("ItemCount").GetComponent<TextMeshProUGUI>()
+                //     .SetText(itemCount.ToString());
             }
             else
             {
                 if (idx >= 0)
                 {
-                    container.GetChild(idx).Find("ItemCount").GetComponent<TextMeshProUGUI>()
+                    Transform itemUI = container.GetChild(idx);
+                    if(!itemUI.gameObject.activeSelf)itemUI.gameObject.SetActive(true);
+                    // Button itemBtn = itemUI.GetComponent<Button>();
+                    // if (!itemBtn.enabled) itemBtn.enabled = true;
+                    itemUI.Find("ItemCount").GetComponent<TextMeshProUGUI>()
                         .SetText(itemCount.ToString());
                 }
                 else
@@ -84,20 +110,38 @@ namespace UI.Inventory
 
                     Transform newInventoryItem = Instantiate(inventoryItemTemplate.transform, container);
                     UIUtils.ConfigureItemUI(ref newInventoryItem, itemCode, idx, itemCount);
-                    newInventoryItem.gameObject.GetComponent<Button>().onClick.AddListener(() => AssignToDispenser(itemCode));
+                    newInventoryItem.gameObject.GetComponent<Button>().onClick
+                        .AddListener(() => AssignToDispenser(itemCode, ref newInventoryItem));
                 }
             }
         }
 
-        private void AssignToDispenser(int itemCode)
+        private void AssignToDispenser(int itemCode, ref Transform itemUI)
         {
+            Button btn = itemUI.gameObject.GetComponent<Button>();
+            switch (ItemData.GetItemType(itemCode))
+            {
+                case GameItemType.Food:
+                    _selectedFood = btn;
+                    break;
+                case GameItemType.Toy:
+                    _selectedToy = btn;
+                    break;
+                case GameItemType.Medicine:
+                    _selectedMed = btn;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            btn.Select();
             EcoSphere.Instance.activeDispenser.SetItemContainer(itemCode);
             EcoSphere.Instance.SetActiveDispenser();
-            OpenClose();
+            // OpenClose();
         }
 
         public void ShowContainer(GameItemType containerType)
         {
+            _openContainer = containerType;
             switch (containerType)
             {
                 case GameItemType.Food:
@@ -124,7 +168,20 @@ namespace UI.Inventory
         {
             inventoryMmfPlayer.PlayFeedbacks();
             isOpen = !isOpen;
+            switch (_openContainer)
+            {
+                case GameItemType.Food:
+                    _selectedFood?.Select();
+                    break;
+                case GameItemType.Toy:
+                    _selectedToy?.Select();
+                    break;
+                case GameItemType.Medicine:
+                    _selectedMed?.Select();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
-
     }
 }

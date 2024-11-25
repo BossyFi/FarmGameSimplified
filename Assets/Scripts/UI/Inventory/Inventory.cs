@@ -79,22 +79,6 @@ namespace UI.Inventory
             return false;
         }
 
-        [ContextMenu("Show inventory")]
-        void ShowInventory()
-        {
-            Debug.Log("Food: ");
-            foreach (KeyValuePair<int, int> food in foodItems)
-            {
-                Debug.Log(food.Key + ": " + food.Value);
-            }
-
-            Debug.Log("Toy: ");
-            foreach (KeyValuePair<int, int> toy in toyItems)
-            {
-                Debug.Log(toy.Key + ": " + toy.Value);
-            }
-        }
-
         [ContextMenu("Remove 3")]
         void RemoveXOfEach()
         {

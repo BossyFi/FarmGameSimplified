@@ -8,7 +8,6 @@ namespace UI.Game
     public class UIGame : MonoBehaviour
     {
         [SerializeField] private Button shopBtn;
-        [SerializeField] private Button inventoryBtn;
         [SerializeField] private TextMeshProUGUI moneyText;
     
         private UIMediator _mediator;
@@ -16,7 +15,6 @@ namespace UI.Game
         private void Awake()
         {
             shopBtn.onClick.AddListener(() => _mediator.OpenShop());
-            inventoryBtn.onClick.AddListener(() => _mediator.OpenInventory(0));
         }
 
         public void Configure(UIMediator uiMediator)
