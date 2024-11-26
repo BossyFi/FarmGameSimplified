@@ -89,9 +89,6 @@ namespace UI.Inventory
                 if (idx < 0) return;
                 Transform itemUI = container.GetChild(idx);
                 itemUI.gameObject.SetActive(false);
-                // itemUI.GetComponent<Button>().enabled = false;
-                // itemUI.Find("ItemCount").GetComponent<TextMeshProUGUI>()
-                //     .SetText(itemCount.ToString());
             }
             else
             {
@@ -99,8 +96,6 @@ namespace UI.Inventory
                 {
                     Transform itemUI = container.GetChild(idx);
                     if(!itemUI.gameObject.activeSelf)itemUI.gameObject.SetActive(true);
-                    // Button itemBtn = itemUI.GetComponent<Button>();
-                    // if (!itemBtn.enabled) itemBtn.enabled = true;
                     itemUI.Find("ItemCount").GetComponent<TextMeshProUGUI>()
                         .SetText(itemCount.ToString());
                 }
@@ -135,7 +130,7 @@ namespace UI.Inventory
             }
             btn.Select();
             EcoSphere.Instance.activeDispenser.SetItemContainer(itemCode);
-            EcoSphere.Instance.SetActiveDispenser();
+            
             // OpenClose();
         }
 
@@ -182,6 +177,7 @@ namespace UI.Inventory
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            if(!isOpen) EcoSphere.Instance.SetActiveDispenser();
         }
     }
 }
